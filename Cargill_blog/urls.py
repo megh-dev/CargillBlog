@@ -1,9 +1,18 @@
-from django.contrib import admin
 from django.urls import path
+from .views import (
+    PostListView,
+    PostDetailView,
+    PostCreateView,
+    PostUpdateView,
+    PostDeleteView
+)
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.Cargill_blog, name='Cargill-blog'),
-    path('about/', views.Cargill_about, name='Cargill-about'),
+    path('', PostListView.as_view(), name='Cargill-blog'),
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+    path('about/', views.about, name='Cargill-about'),
 ]
